@@ -1,0 +1,144 @@
+Estructura de una funcion
+
+```{r}
+#declaramos la funcion y sus parametros a recibir
+funcion_ejemplo <- function(parametro1,parametro2){
+
+#la logica que va a realizar la funcion
+resultado <- paste(parametro1,parametro2)
+
+#retorna el resultado
+return (resultado)
+  
+}
+
+#llamamos a la funcion con sus parametros
+funcion_ejemplo("Hola", "mundo!!")
+
+```
+Ejemplo de funcion
+Funcion suma, en esta funcion es necesario enviar los argumentos que son los dos numeros que se suman
+```{r}
+
+suma <- function(x, y) {
+  return(x + y)
+}
+  
+suma(10,20)
+
+
+```
+ejemplo funcion dos
+lo que realiza esta funcion es sumar todos los numeros que estan en el rango indicado si no se envia ningun parametro toma por defecto los valores 1 y 3
+```{r}
+
+suma_contador <- function(i=1,f=3){
+  sum <- 0
+  while(i <= f){
+    sum <- sum + i
+    i <- i + 1
+  }
+  
+  return(sum)
+}
+
+suma_contador()
+
+```
+FUNCION apply()
+aplica una función a un dataframe, matriz, lista o vector, eligiendo si se va a aplicar a las filas o a las columnas.
+
+parametros de la funcion
+
+x : matriz, dataframe, lista o vector.
+MARGIN: 1 para operar sobre las filas y 2 para operar sobre las columnas.
+FUN: Función que se aplica sobre filas o columnas.
+
+Ejemplo: Imaginemos que tenemos 6 niños, que asisten a 2 colegios diferentes, y contamos con los días asistidos y los días totales. Y queremos calcular los días promedio asistidos y totales por todos los niños.
+```{r}
+
+df = data.frame("NOMBRES" = c("Ana","Javiera","José","Juan","Miguel", "María"),
+                "LUGAR_ASISTIR" = c("Lugar1", "Lugar2", "Lugar1", "Lugar2", "Lugar1", "Lugar1"),
+                "DIAS_ASISTIDOS" = c(8,7,10,5,6,10),
+                "DIAS_TOTALES" = c(10,10,10,10,10,10))
+
+apply(df[,c(3,4)], 2, mean)
+
+```
+FUNCION lapply()
+
+se utiliza para realizar operaciones a una lista, pero igual admite otro tipo de objeto. La diferencia con la función apply() es que la función devuelve una lista
+
+lapply(x, FUN)
+x : matriz, dataframe, lista o vector.
+FUN: Función que se aplica sobre filas o columnas.
+
+Queremos calcular los días promedio asistidos y totales por todos los niños.
+
+```{r}
+
+lapply(df[,c(3,4)], mean)
+
+```
+FUNCION sapply()
+
+se utiliza para realizar operaciones a una lista, pero igual admite otro tipo de objeto La diferencia con la función apply() es que la función devuelve un vector
+
+sapply(x, FUN)
+x : matriz, dataframe, lista o vector.
+FUN: Función que se aplica sobre filas o columnas.
+
+Queremos calcular los días promedio asistidos y totales por todos los niños.
+
+
+```{r}
+#Si queremos saber cuales son los días de asistencia promedio por lugar_asistir.
+tapply(df$DIAS_ASISTIDOS,df$LUGAR_ASISTIR, mean)
+
+```
+FUNCION vapply()
+
+Devuelve un vector con la longitud que tiene cada una de las listas introducidas como parámetro.
+
+
+```{r}
+
+vapply(df[,c(3,4)], length,integer(1))
+
+```
+
+FUNCION tapply()
+
+La función tapply es otro comando de la familia apply, que se usa para entradas vectoriales. Por lo general, necesita algunos valores y un factor, que agrupa estos valores:
+Ahora, podemos usar la función tapply para obtener (por ejemplo) la suma de cada grupo:
+```{r}
+input_values <- 1:10
+input_values
+
+input_factor <- rep(letters[1:5], 2)
+input_factor
+
+tapply(input_values, input_factor, sum)
+
+```
+FUNCION mapply()
+
+La función mapply() en R, realiza operaciones entre matrices y devuelve una lista o vector.
+
+mapply(FUN, arg1, arg2)
+FUN: Función que se aplica sobre filas o columnas.
+arg1, arg2: matrices que se va a operar. 
+
+Ahora queremos la proporción de dias_asistidos sobre dias_totales por niño.
+ 
+```{r}
+
+f <- function(a,b) a/b
+mapply(f,df$DIAS_ASISTIDOS, df$DIAS_TOTALES)
+
+#otro ejemplo
+mapply(rep, times = 1:5, letters[1:5])
+
+
+```
+
