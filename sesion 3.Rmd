@@ -151,4 +151,79 @@ while(i <= 10){
 
 
 ```
+ciclo for
+
+```{r}
+
+linkedin <- c(16,9,13,5,2,17,14)
+for(i in linkedin){
+  print(i)
+}
+
+for(i in 1:length(linkedin)){
+  print(linkedin[i])
+}
+  
+  
+```
+
+loop over a list
+```{r}
+
+nyc <- list(pop = 8405837, boroughs = c("Manhathan", "Bronx","Brooklyn", "Queens", "Staten island"), capital = FALSE)
+
+for(n in nyc){
+  print(n)
+}
+
+for(i in 1:length(nyc)){
+  print(nyc[i])
+}
+
+```
+
+for over a matrix
+
+```{r}
+new_hope <- c(460.998,314.4)
+empire_strikes <- c(290.475,247.900)
+return_jedi <- c(309.306,165.8)
+box_office <- c(new_hope,empire_strikes,return_jedi)
+box_office
+
+star_wars_matrix <- matrix(box_office,byrow = TRUE, nrow = 3)
+star_wars_matrix
+
+for(i in 1:nrow(star_wars_matrix)){
+  for(j in 1:ncol(star_wars_matrix)){
+    print(paste("on row", i, "and column", j, "the board contains",star_wars_matrix[i,j]))
+  }
+}
+
+```
+```{r}
+
+linkedin <- c(16,9,13,5,2,17,14)
+for (li in linkedin) {
+  if(li > 10){
+    print("you are popular")
+  }else{
+    print("be more visible")
+  }
+  if(li>16){
+    print("this is ridiculous, im outa here")
+    break
+  }
+  
+  if(li>5){
+    print("this is too embarrasing")
+  }
+  print(li)
+}
+
+```
+```{r}
+
+
+```
 
