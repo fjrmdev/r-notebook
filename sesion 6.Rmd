@@ -340,6 +340,57 @@ counties %>%
 
 ```
 
+renaming column after count
+
+```{r}
+library(dplyr)
+counties%>%
+  count(state) %>%
+  rename(num_counties = n)
+
+counties %>%
+  select(state,county,poverty_rate = poverty)
+
+```
+Using transmute
+
+```{r}
+counties %>%
+  transmute(state, county, population,density=population/land_area)%>%
+  filter(population >= 1000000) %>%
+  arrange(desc(density))
+
+
+```
+choosing among the four verbs
+
+```{r}
+##change the name of uneployment column
+
+counties %>%
+  rename(unemployment_rate=unemployment)
+
+#keep the state and punty coluns, and the columns containing poverty
+
+counties%>%
+  select(state, county, contains("poverty"))
+
+#calculate the function_Women column without dropping the other columns
+
+counties%>%
+  mutate(fraction_women = women/population)
+
+#keep only the state, county, and employement_rate columns
+
+counties %>%
+  transmute(state, county, employment_rate = employed/population)
+
+
+```
+
+
+
+
 ```{r}
 
 
