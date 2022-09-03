@@ -113,10 +113,35 @@ right join
 
 parts %>%
   count(part_cat_id) %>%
-  right_join(part_categories, by=c("part_cat_id"="id"))
+  right_join(part_categories, by=c("part_cat_id"="id"))%>%
+  replace_na(list(n=0))
 
 
 
 ```
 
+Joininh themes to their children
+
+```{r}
+themes %>%
+  inner_join(themes, by=c("id"="parent_id"), suffix = c("_parent","_child")) %>%
+  filter(name_parent == "Harry Potter")
+
+```
+
+
+```{r}
+themes %>%
+  inner_join(themes, by=c("id"="parent_id"), suffix = c("_parent","_child"))%>%
+  inner_join(themes, by=c("id_child"="parent_id"), suffix = c("_parent","_grand_child"))
+
+
+```
+
+
+```{r}
+
+
+
+```
 
